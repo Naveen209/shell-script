@@ -1,3 +1,4 @@
+#!/bin/bash
 Userid=$(id -u)
 script_name=$0
 Date=$(date)
