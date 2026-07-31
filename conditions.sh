@@ -10,17 +10,17 @@ logfile=/tmp/$script_name-$Date.log
 VALIDATE () {
 if [ $1 -ne 0 ]
 then
-    echo "installation of $2 $R failure $N"
+    echo -e "installation of $2 $R failure $N"
     exit 1
 else
-    echo "installation of $2 $G success N"
+    echo -e "installation of $2 $G success $N"
 fi
 }
 if [ $Userid -eq 0 ]
 then
-    echo "$G Running as root user starting installation $N"
+    echo -e "$G Running as root user starting installation $N"
 else
-    echo "$R Please run the script as root user $N"
+    echo -e "$R Please run the script as root user $N"
 fi 
 yum install mysqlll -y &>>logfile
 VALIDATE $? "mysql"
