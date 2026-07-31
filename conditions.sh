@@ -22,7 +22,7 @@ then
 else
     echo -e "$R Please run the script as root user $N"
 fi 
-yum install mysqlll -y &>>logfile
+yum install mysql -y &>>logfile
 VALIDATE $? "mysql"
 yum install postfix -y &>>logfile
 VALIDATE $? "postfix"
