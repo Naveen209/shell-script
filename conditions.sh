@@ -1,24 +1,29 @@
 #!/bin/bash
 Userid=$(id -u)
 script_name=$0
+R="\e{31m"
+G="\e{32m"
+N="\e{0m"
 Date=$(date +%F:%H:%M:%S)
-logfile=/tmp/$0-$Date.log
+logfile=/tmp/$script_name-$Date.log
 
 VALIDATE () {
 if [ $1 -ne 0 ]
 then
-    echo "installation of $2 failure"
+    echo "installation of $2 $R failure $N"
     exit 1
 else
-    echo "installation of $2 success"
+    echo "installation of $2 $G success N"
 fi
 }
 if [ $Userid -eq 0 ]
 then
-    echo "Running as root user starting installation"
+    echo "$G Running as root user starting installation $N"
 else
-    echo "Please run the script as root user"
+    echo "$R Please run the script as root user $N"
 fi 
-yum install mysql -y &>>logfile
+yum install mysqlll -y &>>logfile
 VALIDATE $? "mysql"
+yum install postfix -y &>>logfile
+VALIDATE $? "postfix"
 
