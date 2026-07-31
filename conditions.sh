@@ -1,9 +1,9 @@
 #!/bin/bash
 Userid=$(id -u)
 script_name=$0
-R="\e{31m"
-G="\e{32m"
-N="\e{0m"
+R="\e[31m"
+G="\e[32m"
+N="\e[0m"
 Date=$(date +%F:%H:%M:%S)
 logfile=/tmp/$script_name-$Date.log
 
