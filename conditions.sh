@@ -20,5 +20,5 @@ else
     echo "Please run the script as root user"
 fi 
 yum install mysql -y &>>logfile
-VALIDATE() $?
+VALIDATE $?
 
