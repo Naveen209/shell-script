@@ -7,7 +7,7 @@ Y="\e[33m"
 SCRIPT_NAME=$0
 DATE=(date +%F:%H:%M:%S)
 LOGSDIR=/home/centos/shellscript-logs
-LOGFILE=$LOGSDIR/$SCRIPT_NAME-$DATE.log
+LOGFILE=$LOGSDIR/$0-$DATE.log
 VALIDATE() {
     if [$? -ne 0 ]
     then
