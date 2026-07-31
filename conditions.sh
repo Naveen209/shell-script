@@ -7,10 +7,10 @@ logfile=cat >>/tmp/$0-$Date.log
 VALIDATE () {
 if [ $1 -ne 0 ]
 then
-    echo "installation of $1 failure"
+    echo "installation of $2 failure"
     exit 1
 else
-    echo "installation od $1 success"
+    echo "installation of $2 success"
 fi
 }
 if [ $Userid -eq 0 ]
@@ -20,5 +20,5 @@ else
     echo "Please run the script as root user"
 fi 
 yum install mysql -y &>>logfile
-VALIDATE $?
+VALIDATE $? "mysql"
 
