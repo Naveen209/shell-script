@@ -29,10 +29,9 @@ do
   if [ $? -ne 0 ]
   then
       echo -e "$i not installed lets install it"
-      yum install $i -y
+      yum install $i -y &>>LOGFILE
       VALIDATE $? "$i"
   else
       echo -e "$Y $i is already installed $N"
-
   fi
 done
