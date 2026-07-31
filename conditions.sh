@@ -2,7 +2,7 @@
 Userid=$(id -u)
 script_name=$0
 Date=$(date +%F:%H:%M:%S)
-logfile=cat >>/tmp/$0-$Date.log
+logfile=/tmp/$0-$Date.log
 
 VALIDATE () {
 if [ $1 -ne 0 ]
