@@ -17,7 +17,7 @@ VALIDATE() {
     fi
 }
 
-if [ USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo -e "$R Please run the script as root user $N"
     exit 1
