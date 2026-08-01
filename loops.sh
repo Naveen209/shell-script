@@ -6,8 +6,8 @@ N="\e[0m"
 Y="\e[33m"
 SCRIPT_NAME=$0
 DATE=(date +%F:%H:%M:%S)
-LOGSDIR=/home/ec2user/shellscript-logs
-LOGFILE=cat >>$LOGSDIR/$0-$DATE.log
+LOGSDIR=mkdir /home/shellscript-logs
+LOGFILE=$LOGSDIR/$0-$DATE.log
 VALIDATE() {
     if [$? -ne 0 ]
     then
