@@ -9,7 +9,7 @@ DATE=(date +%F:%H:%M:%S)
 LOGSDIR=mkdir /home/shellscript-logs
 LOGFILE=$LOGSDIR/$0-$DATE.log
 VALIDATE() {
-    if [$? -ne 0 ]
+    if [ $? -ne 0 ]
     then
         echo -e "installation of $2 $R FAILURE $N"
     else
