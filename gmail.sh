@@ -10,8 +10,6 @@ USERID=$(id -u)
 SASL_FILE="/etc/postfix/sasl_passwd"
 SMTP_SERVER="[smtp.gmail.com]:587"
 SMTP_USER="naveenkumarseelam209@gmail.com"
-read -s -p "Enter Gmail App Password: " SMTP_PASS
-echo
 
 VALIDATE() {
     if [ $? -ne 0 ]
@@ -42,6 +40,10 @@ VALIDATE $? "enable postfix"
 cp postfix.repo /etc/postfix/main.cf &>> $LOGFILE
 VALIDATE $? "Copying repos"
 mkdir -p "$(dirname "$SASL_FILE")"
+read -s -p "Enter Gmail App Password: " SMTP_PASS
+echo
+VALIDATE $? "Password authenticated"
+echo
 echo "${SMTP_SERVER} ${SMTP_USER}:${SMTP_PASS}" > "$SASL_FILE"
 chmod 600 "$SASL_FILE"
 postmap "$SASL_FILE"
