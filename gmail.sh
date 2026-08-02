@@ -25,7 +25,7 @@ then
     echo -e "$R This script execution requires root access, rerunning as root user $N"
     exec sudo bash "$0" "$@" &>> "$LOGFILE"
 fi
-yum update -y --skip-broken
+yum update -y --skip-broken &>> "$LOGFILE"
 VALIDATE $? "Update kernel"
 yum install -y postfix cyrus-sasl cyrus-sasl-plain s-nail &>> "$LOGFILE"
 VALIDATE $? "Installing postfix"
