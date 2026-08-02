@@ -10,7 +10,8 @@ USERID=$(id -u)
 SASL_FILE="/etc/postfix/sasl_passwd"
 SMTP_SERVER="[smtp.gmail.com]:587"
 SMTP_USER="naveenkumarseelam209@gmail.com"
-SMTP_PASS="Mypass"
+read -s -p "Enter Gmail App Password: " SMTP_PASS
+echo
 
 VALIDATE() {
     if [ $? -ne 0 ]
@@ -24,7 +25,7 @@ VALIDATE() {
 if [ $USERID -ne 0 ]
 then
     echo -e "$R This script execution requires root access, rerunning as root user $N"
-    exec sudo bash "$0" "$@" >>& $LOGFILE
+    exec sudo bash "$0" "$@" &>> $LOGFILE
     VALIDATE $? "root access"
 fi
 yum update -y --exclude=kernel* >>& $LOGFILE
