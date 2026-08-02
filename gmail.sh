@@ -20,32 +20,35 @@ VALIDATE() {
     fi
 }
 
-if [ $USERID -ne 0 ]
+if [ "$USERID" -ne 0 ]
 then
     echo -e "$R This script execution requires root access, rerunning as root user $N"
     exec sudo bash "$0" "$@" &>> "$LOGFILE"
 fi
 yum update -y --skip-broken &>> "$LOGFILE"
-VALIDATE $? "Update kernel"
+VALIDATE $? "Updating packages"
 yum install -y postfix cyrus-sasl cyrus-sasl-plain s-nail &>> "$LOGFILE"
 VALIDATE $? "Installing postfix"
 systemctl start postfix &>> "$LOGFILE"
 VALIDATE $? "Starting postfix"
 systemctl enable postfix &>> "$LOGFILE"
-VALIDATE $? "enable postfix"
+VALIDATE $? "Enabling postfix"
 systemctl status postfix &>> "$LOGFILE"
-VALIDATE $? "enable postfix"
+VALIDATE $? "Checking postfix status"
 
 cp postfix.repo /etc/postfix/main.cf &>> "$LOGFILE"
 VALIDATE $? "Copying repos"
 read -s -p "Enter Gmail App Password: " SMTP_PASS
 echo
-VALIDATE $? "Password authenticated"
+VALIDATE $? "Reading Gmail App Password"
 echo
 echo "${SMTP_SERVER} ${SMTP_USER}:${SMTP_PASS}" > "$SASL_FILE"
 chmod 600 "$SASL_FILE"
-postmap "$SASL_FILE"
-systemctl restart postfix
+postmap "$SASL_FILE" &>> "$LOGFILE"
+VALIDATE $? "Creating postfix lookup table"
+systemctl restart postfix &>> "$LOGFILE"
+VALIDATE $? "Restarting postfix"
 systemctl status postfix &>> "$LOGFILE"
+VALIDATE $? "Checking postfix status"
 echo "This is a test mail & Date $(date)" | mail -s "CentOS 9 Test" "$SMTP_USER"
 VALIDATE $? "Sending test mail"
