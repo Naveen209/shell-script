@@ -22,7 +22,7 @@ while read line
 do
   usage=$(echo "$line" | awk '{sub("%","",$6); print $6}')
   partition=$(echo $line | awk '{print $1}')
-  if [ $usage -gt 10 ]
+  if [ $usage -gt 1 ]
   then
       message+="HIGH DISK USAGE ON: $partition: $usage \n"
   fi
