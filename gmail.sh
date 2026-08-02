@@ -27,7 +27,7 @@ then
 fi
 yum update -y --exclude=kernel* &>> "$LOGFILE"
 VALIDATE $? "Update kernel"
-yum install -y postfix cyrus-sasl cyrus-sasl-plain mailx &>> "$LOGFILE"
+yum install -y postfix cyrus-sasl cyrus-sasl-plain &>> "$LOGFILE"
 VALIDATE $? "Installing postfix"
 systemctl start postfix &>> "$LOGFILE"
 VALIDATE $? "Starting postfix"
