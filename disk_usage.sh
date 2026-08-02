@@ -18,13 +18,13 @@ VALIDATE() {
     fi 
 }
 DISK_USAGE=$(df -hT | grep xfs)
-while read in line
+while read line
 do
-  usage=$(echo $line | awk '{sub("%","",$6); print $6}')
+  usage=$(echo "$line" | awk '{sub("%","",$6); print $6}')
   partition=$(echo $line | awk '{print $1}')
   if [ $usage -gt 10 ]
   then
       message+="HIGH DISK USAGE ON: $partition: $usage \n"
   fi
 done <<< $DISK_USAGE
-echo -e "message: $message"
+echo -e "$message"
