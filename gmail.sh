@@ -28,15 +28,15 @@ then
     exec sudo bash "$0" "$@" &>> $LOGFILE
     VALIDATE $? "root access"
 fi
-yum update -y --exclude=kernel* >>& $LOGFILE
+yum update -y --exclude=kernel* &>> $LOGFILE
 VALIDATE $? "Update kernel"
 yum install -y postfix cyrus-sasl cyrus-sasl-plain mailx &>> $LOGFILE
 VALIDATE $? "Installing postfix"
-systemctl start postfix >>& $LOGFILE
+systemctl start postfix &>> $LOGFILE
 VALIDATE $? "Starting postfix"
-systemctl enable postfix >>& $LOGFILE
+systemctl enable postfix &>> $LOGFILE
 VALIDATE $? "enable postfix"
-systemctl status postfix >>& $LOGFILE
+systemctl status postfix &>> $LOGFILE 
 VALIDATE $? "enable postfix"
 
 cp postfix.repo /etc/postfix/main.cf &>> $LOGFILE
@@ -46,6 +46,6 @@ echo "${SMTP_SERVER} ${SMTP_USER}:${SMTP_PASS}" > "$SASL_FILE"
 chmod 600 "$SASL_FILE"
 postmap "$SASL_FILE"
 systemctl restart postfix
-systemctl status postfix >>& $LOGFILE
+systemctl status postfix &>> $LOGFILE
 echo "This is a test mail & Date $(date)" | mail -s "CentOS 9 Test" "$SMTP_USER"
 
