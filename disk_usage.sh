@@ -8,6 +8,7 @@ R="\[31m"
 G="\[32m"
 N="\[0m"
 Y="\[33m"
+message=
 VALIDATE() {
     if [ $USERID -ne 0 ]
     then
